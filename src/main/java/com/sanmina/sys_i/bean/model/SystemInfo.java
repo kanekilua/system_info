@@ -1,7 +1,7 @@
 package com.sanmina.sys_i.bean.model;
 
 /**
- * computer's
+ * computer's infomation entity
  * Created by kane on 17-3-6.
  */
 public class SystemInfo {
@@ -12,8 +12,6 @@ public class SystemInfo {
     private String cpuMHz;
     private String totalMem;
     private String freeMem;
-
-
 
 
     public String getTotalMem() {

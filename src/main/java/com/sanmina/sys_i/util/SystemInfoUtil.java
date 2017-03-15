@@ -13,16 +13,22 @@ import java.io.InputStreamReader;
 
 /**
  * Created by kane on 17-3-6.
+ * 获取系统信息的工具类
  */
 public class SystemInfoUtil {
 
     private static Logger logger = LoggerFactory.getLogger(SystemInfoUtil.class);
+    //获取系统信息的几个linux命令
     private static final String cpuComm = "lscpu | grep -E \"MHz|name\"";
-    private static final String ipComm = "ifconfig enp4s0f2 | grep \"inet 地址\" | awk '{ print $2}' | awk -F: '{print $2}'";
+    private static final String ipComm = "ifconfig enp4s0f2 | grep \"inet addr\" | awk '{ print $2}' | awk -F: '{print $2}'";
     private static final String memComm = "cat /proc/meminfo";
     private static final String hostComm = "hostname";
 
-
+    /**
+    *获取系统计算机名的方法
+    *通过形参传入ssh创建连接之后打开的Connection和SystemInfo
+     * 执行命令后,讲结果传到缓冲流,再通过缓冲流读取数据
+    */
     public void getHostName(Connection conn, SystemInfo systemInfo){
         try{
             Session session = conn.openSession();
@@ -37,6 +43,7 @@ public class SystemInfoUtil {
 
     }
 
+    /**获取ip地址的方法*/
     public void getIp(Connection conn, SystemInfo systemInfo){
         try{
             Session session = conn.openSession();
@@ -51,6 +58,7 @@ public class SystemInfoUtil {
 
     }
 
+    /**获取cpu信息的方法*/
     public void getCpu(Connection conn, SystemInfo systemInfo){
         try{
             Session session = conn.openSession();
@@ -65,7 +73,6 @@ public class SystemInfoUtil {
                 }else{
                     subLine = line.split(":");
                 }
-                logger.info(subLine[0]+"---------------------"+subLine[1]);
                 if ("Model name".equals(subLine[0])) {
 
                     systemInfo.setCpuModelName(subLine[1].trim());
@@ -82,6 +89,7 @@ public class SystemInfoUtil {
         }
     }
 
+    /**获取内存信息*/
     public void getMem(Connection conn, SystemInfo systemInfo){
         try{
             Session session = conn.openSession();

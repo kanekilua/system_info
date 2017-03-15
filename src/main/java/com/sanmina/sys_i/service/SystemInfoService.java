@@ -18,10 +18,13 @@ public class SystemInfoService {
 
     private static Logger logger = LoggerFactory.getLogger(SystemInfoService.class);
 
+    /**获取系统信息的业务逻辑代码*/
+
     public SystemInfo getSystemInfo(SshConnectConf sshConnectConf){
         SystemInfo systemInfo = new SystemInfo();
         SystemInfoUtil systemInfoUtil = new SystemInfoUtil();
         try{
+            //通过ssh协议方式连接远程客户端
             Connection conn = new Connection(sshConnectConf.getIp(),sshConnectConf.getPort());
             ConnectionInfo info = conn.connect();
             boolean connResult = conn.authenticateWithPassword(sshConnectConf.getUsername(), sshConnectConf.getPassword());

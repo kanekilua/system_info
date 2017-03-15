@@ -22,6 +22,7 @@ public class SystemInfoController {
     @Autowired
     private SystemInfoService systemInfoService;
 
+    /** 获取系统信息的Get请求接口*/
     @PostMapping
     public JsonResult getSystemInfo(@RequestBody @Valid SshConnectConf sshConnectConf){
         JsonResult jsonResult = new JsonResult();
@@ -34,7 +35,6 @@ public class SystemInfoController {
             jsonResult.setMessage("Getting system infomation faild");
             jsonResult.setSuccess(false);
         }
-//        String result = systemInfo.getHostname() + systemInfo.getCpuMHz() +systemInfo.getFreeMem();
         return jsonResult;
     }
 }

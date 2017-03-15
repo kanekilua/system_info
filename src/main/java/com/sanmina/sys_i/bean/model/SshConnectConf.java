@@ -2,6 +2,7 @@ package com.sanmina.sys_i.bean.model;
 
 /**
  * Created by kane on 17-3-6.
+ * Ssh连接的实体类
  */
 public class SshConnectConf {
     private String ip;
